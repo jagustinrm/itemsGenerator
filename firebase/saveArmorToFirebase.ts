@@ -54,6 +54,37 @@ export const deleteArmorFromFirebase = async (armorId: string) => {
   }
 };
 
+export const deleteDeletableArmorsFromFirebase = async () => {
+  try {
+    const armorsRef = ref(database, 'armors');
+    const snapshot = await get(armorsRef);
+
+    if (!snapshot.exists()) {
+      console.warn('No hay armaduras en Firebase para eliminar.');
+      return;
+    }
+
+    const armorsData = snapshot.val();
+    const armorIds = Object.keys(armorsData);
+
+    for (const armorId of armorIds) {
+      const armorData = armorsData[armorId];
+
+      // Verificar si deletable es true
+      if (armorData.deletable) {
+        console.log(`Eliminando armadura ${armorId} con deletable: true`);
+        const armorRef = ref(database, `armors/${armorId}`);
+        await remove(armorRef);
+        console.log(`Armadura ${armorId} eliminada correctamente.`);
+      } else {
+        console.log(`Armadura ${armorId} no se elimina porque deletable es false.`);
+      }
+    }
+  } catch (error) {
+    console.error('Error al eliminar las armaduras de Firebase:', error);
+  }
+};
+
 export const getArmorsFromFirebase = async (): Promise<Armor[]> => {
   try {
     const armorsRef = ref(database, 'armors');

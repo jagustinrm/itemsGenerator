@@ -175,6 +175,7 @@ const generateRandomArmor = async (playerLevel: number): Promise<Armor> => {
     },
     questReward: false,
     deletable: true,
+    shop: true,
   };
 };
 

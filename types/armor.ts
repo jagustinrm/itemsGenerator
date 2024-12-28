@@ -53,6 +53,7 @@ export interface Armor {
   };
   questReward?: boolean; // Indica si proviene de una misión
   deletable?: boolean;
+  shop?: boolean;
 }
 
 export interface ArmorStore {
