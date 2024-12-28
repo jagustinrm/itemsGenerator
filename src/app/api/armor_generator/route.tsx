@@ -17,7 +17,7 @@ export async function POST (request: Request) {
         console.log(armor)
         return NextResponse.json({ status: 200, message: armor });
     } catch (error) {
-        console.error("POST request failed:", error.message);
+        console.error("POST request failed:", (error as Error).message);
         return NextResponse.json({ status: 500, message: "Internal Server Error" });
     }
 }
