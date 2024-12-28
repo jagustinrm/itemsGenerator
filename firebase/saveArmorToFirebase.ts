@@ -1,6 +1,6 @@
 import { database } from './firebaseConfig'; // Importa la configuración de Firebase
 import { ref, set, get, remove, update } from 'firebase/database'; // Importa las funciones necesarias de Firebase
-import { Armor } from '../stores/types/armor';
+import { Armor } from '../types/armor';
 
 // Función para guardar una armadura en Firebase con control de ID único
 export const saveArmorToFirebase = async (armorId: string, armor: Armor) => {
